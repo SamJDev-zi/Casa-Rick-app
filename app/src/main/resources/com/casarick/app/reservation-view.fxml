@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f4f7f6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.ReservationController">
+    <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="20.0" style="-fx-background-color: #2c3e50;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding><Insets left="20.0" right="20.0" /></padding>
+            <children>
+                <Label text="NUEVA RESERVA" textFill="WHITE">
+                    <font><Font name="System Bold" size="18.0" /></font>
+                </Label>
+                <Separator orientation="VERTICAL" prefHeight="30.0" />
+                <Label fx:id="lblUser" text="Usuario: -" textFill="#ecf0f1" />
+                <Label fx:id="lblBranch" text="Sucursal: -" textFill="#ecf0f1" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnBack" onAction="#handleBackAction" style="-fx-background-color: #e74c3c;" text="VOLVER" textFill="WHITE" />
+            </children>
+        </HBox>
+
+        <SplitPane dividerPositions="0.6" layoutY="60.0" prefHeight="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+            <items>
+                <VBox spacing="10.0">
+                    <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                    <children>
+                        <Label style="-fx-font-weight: bold;" text="1. SELECCIONAR CLIENTE" />
+                        <HBox spacing="10.0">
+                            <TextField fx:id="txtSearchCustomer" promptText="Buscar cliente..." HBox.hgrow="ALWAYS" />
+                            <Button fx:id="btnSelectCustomer" style="-fx-background-color: #3498db;" text="SELECCIONAR" textFill="WHITE" />
+                        </HBox>
+                        <Label fx:id="lblSelectedCustomer" text="Cliente: No seleccionado" textFill="#7f8c8d" />
+                        <TableView fx:id="tblCustomers" prefHeight="150.0">
+                            <columns>
+                                <TableColumn fx:id="colCustName" prefWidth="150.0" text="Nombre" />
+                                <TableColumn fx:id="colCustLast" prefWidth="150.0" text="Apellido" />
+                                <TableColumn fx:id="colCustPhone" prefWidth="120.0" text="Teléfono" />
+                            </columns>
+                        </TableView>
+
+                        <Separator />
+                        <Label style="-fx-font-weight: bold;" text="2. SELECCIONAR PRODUCTO (Doble clic)" />
+                        <TextField fx:id="txtSearchProduct" promptText="Buscar por nombre..." />
+                        <TableView fx:id="tblInventory" prefHeight="200.0" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colInvProd" prefWidth="250.0" text="Producto" />
+                                <TableColumn fx:id="colInvStock" prefWidth="80.0" text="Stock" />
+                                <TableColumn fx:id="colInvPrice" prefWidth="100.0" text="Precio Unit." />
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+
+                <VBox spacing="15.0" style="-fx-background-color: #ffffff;">
+                    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                    <children>
+                        <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="DETALLES DE RESERVA" />
+
+                        <VBox spacing="5.0" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 5;">
+                            <Label text="Producto Seleccionado:" style="-fx-font-weight: bold;"/>
+                            <Label fx:id="lblSelectedProduct" text="Ninguno" textFill="#2980b9" wrapText="true"/>
+                        </VBox>
+
+                        <HBox spacing="10.0">
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label text="Cantidad:" />
+                                <TextField fx:id="txtQuantity" promptText="0" />
+                            </VBox>
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label text="Precio Total:" />
+                                <TextField fx:id="txtTotalPrice" editable="false" style="-fx-background-color: #eee;" />
+                            </VBox>
+                        </HBox>
+
+                        <HBox spacing="10.0">
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label text="A cuenta (Depósito):" />
+                                <TextField fx:id="txtDeposit" promptText="0.00" />
+                            </VBox>
+                            <VBox HBox.hgrow="ALWAYS">
+                                <Label text="Saldo Pendiente:" />
+                                <TextField fx:id="txtBalance" editable="false" style="-fx-background-color: #eee;" />
+                            </VBox>
+                        </HBox>
+
+                        <VBox spacing="5.0">
+                            <Label text="Fecha de Expiración:" />
+                            <DatePicker fx:id="dpExpiration" maxWidth="Infinity" />
+                        </VBox>
+
+                        <VBox spacing="5.0">
+                            <Label text="Descripción / Notas:" />
+                            <TextArea fx:id="txtDescription" prefHeight="80.0" promptText="Detalles adicionales..." wrapText="true" />
+                        </VBox>
+
+                        <Pane VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnSaveReservation" maxWidth="Infinity" onAction="#handleSaveReservation" prefHeight="50.0" style="-fx-background-color: #2c3e50; -fx-font-weight: bold;" text="CREAR RESERVA" textFill="WHITE" />
+                    </children>
+                </VBox>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

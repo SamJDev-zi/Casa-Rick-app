@@ -1,0 +1,101 @@
+.banner-logo {
+    -fx-background-image: url('../img/FONDO.png');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);
+}
+
+.card-login {
+    -fx-background-color: #e0e0e0;
+    -fx-padding: 20px 40px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);
+    -fx-spacing: 15px;
+}
+
+.image-container {
+    -fx-min-width: 200px;
+    -fx-min-height: 150px;
+    -fx-max-width: 200px;
+    -fx-max-height: 150px;
+}
+
+.logo-login {
+    -fx-background-image: url('../img/logo-principal.png');
+    -fx-image-constrain: scale-to-fit;
+    -fx-alignment: center;
+}
+
+.input-login {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #cccccc transparent;
+    -fx-border-width: 0 0 2px 0;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: #555555;
+}
+
+.input-login:hover {
+    -fx-prompt-text-fill: #a0a0a0;
+}
+
+.login-button {
+    -fx-background-color: #000000;
+    -fx-border-color: transparent;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 30px;
+    -fx-margin: 20px 20px;
+}
+
+.list-branches {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+
+.list-branches:hover {
+    -fx-background-color: #a0a0a0;
+}
+
+.rounded-image {
+    -fx-background-image: url("../img/logo-home.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: #a18a7a;
+    -fx-border-color: #a18a7a;
+    -fx-border-width: 1px;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+}
+
+.table-cell {
+    -fx-padding: 8px 5px 5px 5px; /* Arriba Derecha Abajo Izquierda */
+    -fx-alignment: center; /* Puedes ajustar la alineación aquí */
+}
+
+.logout-button {
+    -fx-text-fill: white;
+    -fx-background-color: red;
+}
+
+.grip-home {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+
+.corner-button {
+    -fx-alignment: bottom-right;
+    -fx-padding: 5px;
+    -fx-font-family: sans-serif;
+}
+
+#createBranch {
+    -fx-text-fill: white;
+    -fx-background-color: green;
+}
