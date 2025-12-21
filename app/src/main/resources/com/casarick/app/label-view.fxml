@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.LabelController">
+   <children>
+      <Pane prefHeight="136.0" prefWidth="900.0" styleClass="banner-logo">
+         <children>
+            <Button fx:id="buttonBack" layoutX="834.0" layoutY="14.0" mnemonicParsing="false" text="Volver" />
+            <TextField fx:id="searchByName" layoutX="358.0" layoutY="39.0" prefHeight="42.0" prefWidth="214.0" promptText="Buscar por nombre" />
+            <TextField fx:id="searchByNumber" layoutX="579.0" layoutY="39.0" prefHeight="42.0" prefWidth="214.0" promptText="buscar por numer (ej. 22-1)" />
+         </children>
+      </Pane>
+      <Button fx:id="printButton" layoutX="792.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="imprimir" />
+      <Button fx:id="cancelAction" layoutX="695.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="cancelar" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Pane fx:id="previewPrint" layoutY="173.0" prefHeight="379.0" prefWidth="900.0" />
+   </children>
+</AnchorPane>
