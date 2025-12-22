@@ -8,6 +8,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,10 @@ public class InventoryService {
     // GET: Solo productos con existencias (usado en Ventas)
     public List<Inventory> getWithStock() {
         return fetchList(URL_API + "/stock");
+    }
+
+    public List<Inventory> getInventoriesByCreated(Long id) {
+        return fetchList(URL_API + "/by-created/"+ LocalDateTime.now() + "/" + id);
     }
 
     // POST: Crear nuevo registro de inventario
