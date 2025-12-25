@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoleService {
-    private final String URL_API = "http://localhost:8080/api/roles";
+    private final String URL_API = "http://72.62.105.222:8080/api/roles";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Role> getAllRoles() {

@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="banner-logo" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.LabelController">
-   <children>
-      <Pane layoutX="3.0" prefHeight="132.0" prefWidth="1200.0">
-         <children>
-            <DatePicker layoutX="266.0" layoutY="54.0" />
-            <TextField layoutX="583.0" layoutY="54.0" />
-            <TextField layoutX="772.0" layoutY="54.0" prefHeight="24.0" prefWidth="89.0" />
-            <Button layoutX="49.0" layoutY="48.0" mnemonicParsing="false" styleClass="login-button" text="Registrados hoy" />
-            <Button layoutX="873.0" layoutY="48.0" mnemonicParsing="false" styleClass="login-button" text=" Buscar" />
-            <Button layoutX="1070.0" layoutY="48.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="89.0" styleClass="logout-button" text="Volver" />
-         </children>
-      </Pane>
-      <Pane layoutX="-1.0" layoutY="143.0" prefHeight="594.0" prefWidth="1209.0">
-         <children>
-            <GridPane layoutX="29.0" layoutY="22.0" prefHeight="551.0" prefWidth="1151.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </children>
-      </Pane>
-      <Button layoutX="1048.0" layoutY="731.0" mnemonicParsing="false" styleClass="login-button" text="imprimir" />
-   </children>
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="banner-logo" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.LabelController">
+    <children>
+        <Pane layoutX="3.0" prefHeight="132.0" prefWidth="1200.0">
+            <children>
+                <Button fx:id="btnToday" layoutX="860.0" layoutY="47.0" mnemonicParsing="false" styleClass="login-button" text="Registrados hoy" />
+                <Button fx:id="buttonBack" layoutX="1070.0" layoutY="48.0" mnemonicParsing="false" onAction="#buttonBack" prefHeight="36.0" prefWidth="89.0" styleClass="logout-button" text="Volver" />
+            </children>
+        </Pane>
+        <Pane layoutX="-1.0" layoutY="143.0" prefHeight="594.0" prefWidth="1209.0">
+            <children>
+                <GridPane fx:id="labelGrid" layoutX="29.0" layoutY="22.0" prefHeight="573.0" prefWidth="533.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                </GridPane>
+            </children>
+        </Pane>
+        <Button fx:id="btnPrint" layoutX="1048.0" layoutY="731.0" mnemonicParsing="false" styleClass="login-button" text="imprimir" />
+    </children>
 </AnchorPane>

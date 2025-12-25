@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class BranchService {
-    private final String URL_API = "http://localhost:8080/api/branches";
+    private final String URL_API = "http://72.62.105.222:8080/api/branches";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Branch> getAllBranches() {

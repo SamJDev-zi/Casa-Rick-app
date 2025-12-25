@@ -29,8 +29,10 @@ public class LabelPrinter implements JRDataSource {
         return switch (fieldName) {
             case "id_category" -> currentItem.getProduct().getCategory().getId();
             case "id_product" -> currentItem.getProduct().getId();
-            case "barcode" -> currentItem.getProduct().getBarCodeNumber();
+            case "barCode" -> currentItem.getProduct().getBarCodeNumber();
             case "sale_price" -> currentItem.getSalePrice();
+            case "category_name" -> currentItem.getProduct().getCategory().getName();
+            case "product_name" -> currentItem.getProduct().getName();
             default -> null;
         };
     }
