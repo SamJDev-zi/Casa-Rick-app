@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryService {
-    private final String URL_API = "http://72.62.105.222:8080/api/inventories";
+    private final String URL_API = "http://localhost:8080/api/inventories";
     private final HttpClient client = HttpClient.newHttpClient();
 
     // GET: Obtener todos los inventarios
@@ -77,7 +77,6 @@ public class InventoryService {
             Product p = new Product();
             p.setId(pJson.getLong("id"));
             p.setName(pJson.getString("name"));
-            p.setColor(pJson.optString("color", ""));
             p.setSize(pJson.optString("size", ""));
             p.setBarCodeNumber(pJson.optString("barCodeNumber", ""));
 

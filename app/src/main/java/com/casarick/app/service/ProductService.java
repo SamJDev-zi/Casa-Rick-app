@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductService {
-    private final String URL_API = "http://72.62.105.222:8080/api/products";
+    private final String URL_API = "http://localhost:8080/api/products";
     private final HttpClient client = HttpClient.newHttpClient();
 
     // 1. OBTENER TODOS LOS PRODUCTOS (GET)
@@ -150,7 +150,6 @@ public class ProductService {
         Product p = new Product();
         p.setId(json.getLong("id"));
         p.setName(json.getString("name"));
-        p.setColor(json.optString("color", ""));
         p.setSize(json.optString("size", ""));
         p.setPhotoUrl(json.getString("photoUrl"));
         p.setBarCodeNumber(json.optString("barCodeNumber", ""));
@@ -168,6 +167,11 @@ public class ProductService {
             JSONObject ind = json.getJSONObject("industryDTO");
             p.setIndustry(new Industry(ind.getLong("id"), ind.getString("name")));
         }
+        if (json.has("color")) {
+            JSONObject ind = json.getJSONObject("color");
+            p.setColor(new Color(ind.getLong("id"), ind.getString("name")));
+        }
+
         return p;
     }
 
@@ -176,7 +180,6 @@ public class ProductService {
         JSONObject json = new JSONObject();
         json.put("id", p.getId());
         json.put("name", p.getName());
-        json.put("color", p.getColor());
         json.put("size", p.getSize());
         json.put("photoUrl", p.getPhotoUrl());
         json.put("barCodeNumber", p.getBarCodeNumber());
@@ -185,6 +188,7 @@ public class ProductService {
         json.put("categoryId", p.getCategory() != null ? p.getCategory().getId() : null);
         json.put("typeId", p.getType() != null ? p.getType().getId() : null);
         json.put("industryId", p.getIndustry() != null ? p.getIndustry().getId() : null);
+        json.put("colorId", p.getColor() != null ? p.getColor().getId() : null);
 
         return json;
     }

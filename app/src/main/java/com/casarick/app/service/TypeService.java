@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class TypeService {
-    private final String URL_API = "http://72.62.105.222:8080/api/types";
+    private final String URL_API = "http://localhost:8080/api/types";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Type> getAllTypes() {

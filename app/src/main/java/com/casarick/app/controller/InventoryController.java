@@ -32,6 +32,8 @@ public class InventoryController {
     @FXML private TableColumn<Inventory, String> colType;
     @FXML private TableColumn<Inventory, String> colIndustry;
     @FXML private TableColumn<Inventory, Integer> colStock;
+    @FXML private TableColumn<Inventory, String> number;
+    @FXML private TableColumn<Inventory, String> codeBar;
     @FXML private TableColumn<Inventory, Double> colCost;
     @FXML private TableColumn<Inventory, Double> colSale;
 
@@ -50,6 +52,9 @@ public class InventoryController {
         colCost.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCostPrice()));
         colSale.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getSalePrice()));
 
+        //number.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getSalePrice()));
+        //codeBar.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().ge));
+
         // Mapeo de columnas anidadas (Navegando por el objeto Product)
         colProduct.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getProduct() != null ? data.getValue().getProduct().getName() : "N/A"));
@@ -65,6 +70,14 @@ public class InventoryController {
         colIndustry.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getProduct() != null && data.getValue().getProduct().getIndustry() != null
                         ? data.getValue().getProduct().getIndustry().getName() : "N/A"));
+
+        number.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getProduct() != null && data.getValue().getProduct().getBarCodeNumber() != null
+                        ? data.getValue().getProduct().getCategory().getId() + "-" + data.getValue().getProduct().getId() : "N/A"));
+
+        codeBar.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getProduct() != null && data.getValue().getProduct().getBarCodeNumber() != null
+                        ? data.getValue().getProduct().getBarCodeNumber() : "N/A"));
     }
 
     @FXML

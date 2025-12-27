@@ -17,20 +17,22 @@ import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-
-import static javax.swing.JOptionPane.showInputDialog;
 
 public class ProductController {
 
     @FXML
     private Button buttonBack;
 
-    @FXML private TextField productName, productColor, productSize, stockField, costPriceField, salePriceField, barCodeField;
+    @FXML private TextField productName, stockField, costPriceField, salePriceField, barCodeField;
     @FXML private ComboBox<Category> categoryMenu;
     @FXML private ComboBox<Type> typeMenu;
     @FXML private ComboBox<Industry> industryMenu;
+    @FXML private ComboBox<Color> colorMenu;
+    @FXML private ComboBox<String> sizes;
     @FXML private ImageView liveView, capturedImageView;
     @FXML private Label photoPathLabel;
 
@@ -40,6 +42,7 @@ public class ProductController {
     private final CategoryService categoryService = new CategoryService();
     private final TypeService typeService = new TypeService();
     private final IndustryService industryService = new IndustryService();
+    private final ColorService colorService = new ColorService();
 
     // Camera Utils
     private Webcam webcam;
@@ -53,9 +56,20 @@ public class ProductController {
     }
 
     private void loadComboBoxes() {
+        List<String> sizeList = new ArrayList<>();
+
+        sizeList.add("S");
+        sizeList.add("M");
+        sizeList.add("L");
+        sizeList.add("XS");
+        sizeList.add("XM");
+        sizeList.add("XL");
+
         categoryMenu.getItems().setAll(categoryService.getAllCategories());
         typeMenu.getItems().setAll(typeService.getAllTypes());
         industryMenu.getItems().setAll(industryService.getAllIndustries());
+        colorMenu.getItems().setAll(colorService.getAllColors());
+        sizes.getItems().setAll(sizeList);
     }
 
     // --- LÓGICA DE CÁMARA ---
@@ -188,8 +202,8 @@ public class ProductController {
             product.setCategory(categoryMenu.getValue());
             product.setType(typeMenu.getValue());
             product.setIndustry(industryMenu.getValue());
-            product.setColor(productColor.getText());
-            product.setSize(productSize.getText());
+            product.setColor(colorMenu.getValue());
+            product.setSize(sizes.getValue());
             product.setBarCodeNumber(barCodeField.getText());
             product.setPhotoUrl(photoPathLabel.getText());
 
@@ -281,6 +295,19 @@ public class ProductController {
         }
     }
 
+    @FXML void handleAddColor(ActionEvent event) {
+        String name = showInputDialog("Nuevo Color", "Ingrese el nombre del Color:");
+        if (name != null && !name.trim().isEmpty()) {
+            Color newColor = new Color();
+            newColor.setName(name);
+            Color saved = colorService.createNewColor(newColor);
+            if (saved != null) {
+                colorMenu.getItems().add(saved);
+                colorMenu.setValue(saved);
+            }
+        }
+    }
+
     private String showInputDialog(String title, String header) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
@@ -296,8 +323,6 @@ public class ProductController {
 
         // Validar TextFields
         if (productName.getText().trim().isEmpty()) errorMsg += "- Nombre del producto\n";
-        if (productColor.getText().trim().isEmpty()) errorMsg += "- Color\n";
-        if (productSize.getText().trim().isEmpty()) errorMsg += "- Talla/Tamaño\n";
         if (stockField.getText().trim().isEmpty()) errorMsg += "- Stock inicial\n";
         if (costPriceField.getText().trim().isEmpty()) errorMsg += "- Precio Costo\n";
         if (salePriceField.getText().trim().isEmpty()) errorMsg += "- Precio Venta\n";
@@ -306,6 +331,8 @@ public class ProductController {
         if (categoryMenu.getValue() == null) errorMsg += "- Categoría\n";
         if (typeMenu.getValue() == null) errorMsg += "- Tipo\n";
         if (industryMenu.getValue() == null) errorMsg += "- Industria/Marca\n";
+        if (colorMenu.getValue() == null) errorMsg += "- Color\n";
+        if (sizes.getValue().trim().isEmpty()) errorMsg += "- Talla/Tamaño\n";
 
         // Validar que se haya guardado la foto
         // Comprobamos si el label está vacío o tiene el texto por defecto

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationService {
-    private final String URL_API = "http://72.62.105.222:8080/api/reservations";
+    private final String URL_API = "http://localhost:8080/api/reservations";
     private final HttpClient client = HttpClient.newHttpClient();
 
     // 1. GET: Obtener todas las reservas

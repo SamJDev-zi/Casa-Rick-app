@@ -6,7 +6,7 @@ public class Product {
     private Category category;
     private Type type;
     private Industry industry;
-    private String color;
+    private Color color;
     private String size;
     private String photoUrl;
     private String barCodeNumber;
@@ -31,7 +31,7 @@ public class Product {
         return industry;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
@@ -67,7 +67,7 @@ public class Product {
         this.industry = industry;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
