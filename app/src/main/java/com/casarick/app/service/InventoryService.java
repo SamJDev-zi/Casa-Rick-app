@@ -5,14 +5,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryService {
-    private final String URL_API = "http://localhost:8080/api/inventories";
+    private final String URL_API = "http://72.62.105.222:8080/api/inventories";
     private final HttpClient client = HttpClient.newHttpClient();
 
     // GET: Obtener todos los inventarios
@@ -23,6 +28,13 @@ public class InventoryService {
     // GET: Solo productos con existencias (usado en Ventas)
     public List<Inventory> getWithStock() {
         return fetchList(URL_API + "/stock");
+    }
+
+    public List<Inventory> getInventoriesByCreated(Long id) {
+        // Enviamos solo la fecha yYYY-MM-DD
+        String dateStr = LocalDate.now().atStartOfDay().toString();
+
+        return fetchList(URL_API + "/by-created/"+ dateStr + "/" + id);
     }
 
     // POST: Crear nuevo registro de inventario

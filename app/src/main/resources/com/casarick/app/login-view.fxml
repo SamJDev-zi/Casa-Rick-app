@@ -13,10 +13,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.LoginController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.LoginController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="900.0" styleClass="banner-logo" AnchorPane.bottomAnchor="450.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <VBox alignment="CENTER" layoutX="252.0" layoutY="54.0" prefHeight="492.0" prefWidth="395.0" styleClass="card-login" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="110.0">
+      <Pane prefHeight="200.0" prefWidth="1200.0" styleClass="banner-logo" />
+      <VBox alignment="CENTER" layoutX="403.0" layoutY="154.0" prefHeight="492.0" prefWidth="395.0" styleClass="card-login">
          <children>
             <StackPane maxHeight="254.0" maxWidth="419.0" minHeight="200.0" minWidth="250.0" prefHeight="254.0" prefWidth="419.0" styleClass="image-container">
                <children>

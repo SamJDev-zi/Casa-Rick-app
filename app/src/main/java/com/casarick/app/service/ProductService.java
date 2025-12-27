@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductService {
-    private final String URL_API = "http://localhost:8080/api/products";
+    private final String URL_API = "http://72.62.105.222:8080/api/products";
     private final HttpClient client = HttpClient.newHttpClient();
 
     // 1. OBTENER TODOS LOS PRODUCTOS (GET)

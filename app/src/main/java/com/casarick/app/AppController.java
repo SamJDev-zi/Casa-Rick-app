@@ -17,8 +17,7 @@ public class AppController extends Application {
         scene.getStylesheets().add(cssPath);
         stage.setTitle("Casa Rick");
         stage.setScene(scene);
-        stage.setResizable(true);
-        stage.setMaximized(true);
+        stage.setResizable(false);
         stage.show();
     }
 

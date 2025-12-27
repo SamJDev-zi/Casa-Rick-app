@@ -22,6 +22,8 @@ public class InventoryController {
 
     @FXML
     private Button btnBack;
+    @FXML
+    private Button registerToday;
 
     @FXML private TableView<Inventory> inventoryTable;
     @FXML private TableColumn<Inventory, Long> colId;
@@ -80,6 +82,15 @@ public class InventoryController {
 
         // 4. Cargar en la tabla
         ObservableList<Inventory> observableList = FXCollections.observableArrayList(filteredList);
+        inventoryTable.setItems(observableList);
+    }
+
+    @FXML
+    public void loadCreatedTodayInventories() {
+        List<Inventory> inventoryList = inventoryService.getInventoriesByCreated(
+                SessionManager.getInstance().getCurrentBranch().getId());
+
+        ObservableList<Inventory> observableList = FXCollections.observableArrayList(inventoryList);
         inventoryTable.setItems(observableList);
     }
 

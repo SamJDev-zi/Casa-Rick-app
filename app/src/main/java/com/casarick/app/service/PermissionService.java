@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PermissionService {
-    private final String URL_API = "http://localhost:8080/api/permissions";
+    private final String URL_API = "http://72.62.105.222:8080/api/permissions";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Permission> getAllPermissions() {
