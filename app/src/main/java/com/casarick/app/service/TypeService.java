@@ -1,9 +1,5 @@
 package com.casarick.app.service;
 
-import com.casarick.app.model.Type;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -12,8 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.casarick.app.model.Type;
+
 public class TypeService {
-    private final String URL_API = "http://localhost:8080/api/types";
+    private final String URL_API = "http://72.62.105.222:8080/api/types";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Type> getAllTypes() {

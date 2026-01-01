@@ -1,9 +1,5 @@
 package com.casarick.app.service;
 
-import com.casarick.app.model.Category;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -13,8 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.casarick.app.model.Category;
+
 public class CategoryService {
-    private final String URL_API = "http://localhost:8080/api/categories";
+    private final String URL_API = "http://72.62.105.222:8080/api/categories";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Category> getAllCategories() {

@@ -1,19 +1,24 @@
 package com.casarick.app.service;
 
-import com.casarick.app.model.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.casarick.app.model.Branch;
+import com.casarick.app.model.Customer;
+import com.casarick.app.model.Inventory;
+import com.casarick.app.model.Product;
+import com.casarick.app.model.Reservation;
+
 public class ReservationService {
-    private final String URL_API = "http://localhost:8080/api/reservations";
+    private final String URL_API = "http://72.62.105.222:8080/api/reservations";
     private final HttpClient client = HttpClient.newHttpClient();
 
     // 1. GET: Obtener todas las reservas

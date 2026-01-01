@@ -1,11 +1,11 @@
 package com.casarick.app;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class AppController extends Application {
     @Override
@@ -17,7 +17,7 @@ public class AppController extends Application {
         scene.getStylesheets().add(cssPath);
         stage.setTitle("Casa Rick");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
     }
 

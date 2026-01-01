@@ -1,9 +1,5 @@
 package com.casarick.app.service;
 
-import com.casarick.app.model.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -12,8 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.casarick.app.model.Permission;
+import com.casarick.app.model.Role;
+import com.casarick.app.model.User;
+
 public class UserService {
-    private final String URL_API = "http://localhost:8080/api/users";
+    private final String URL_API = "http://72.62.105.222:8080/api/users";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<User> getAllUsers() {
