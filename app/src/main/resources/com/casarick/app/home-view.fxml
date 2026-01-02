@@ -14,7 +14,6 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.HomeController">
    <children>
-      <!-- Panel lateral izquierdo fijo -->
       <Pane prefWidth="319.0" styleClass="banner-logo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <StackPane layoutX="70.0" layoutY="74.0" prefHeight="180.0" prefWidth="180.0" styleClass="rounded-image" />
@@ -28,10 +27,8 @@
          </children>
       </Pane>
       
-      <!-- Botón de cerrar sesión - siempre en la esquina superior derecha -->
       <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="36.0" prefWidth="166.0" styleClass="logout-button" text="Cerrar Sesión" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="22.0" />
       
-      <!-- GridPane principal - se expande con la ventana -->
       <GridPane alignment="CENTER" styleClass="grip-home" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="113.0">
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" prefWidth="100.0" />
@@ -92,7 +89,6 @@
          </children>
       </GridPane>
       
-      <!-- Información del usuario en la parte superior -->
       <VBox alignment="CENTER_LEFT" spacing="20.0" AnchorPane.leftAnchor="369.0" AnchorPane.topAnchor="40.0">
          <children>
             <HBox alignment="CENTER_LEFT" spacing="10.0">

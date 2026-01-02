@@ -26,11 +26,9 @@
             </children>
         </HBox>
 
-        <!-- Área principal para las etiquetas -->
         <VBox spacing="20.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="143.0">
             
             <children>
-                <!-- GridPane para etiquetas - se expande en el espacio disponible -->
                 <GridPane fx:id="labelGrid" VBox.vgrow="ALWAYS">
                     <columnConstraints>
                         <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" prefWidth="100.0" />
@@ -43,12 +41,10 @@
                     </rowConstraints>
                 </GridPane>
                 
-                <!-- Espacio flexible para empujar contenido -->
                 <Pane VBox.vgrow="NEVER" />
             </children>
         </VBox>
 
-        <!-- Botón de imprimir en la parte inferior -->
         <HBox alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
             
             <children>

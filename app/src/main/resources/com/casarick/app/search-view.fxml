@@ -12,8 +12,6 @@
 <AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.SearchController">
     
     <children>
-          
-                <!-- Contenedor para campos de búsqueda (centrados) -->
           <HBox alignment="CENTER" styleClass="banner-logo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
@@ -22,7 +20,6 @@
                   
                               <TextField fx:id="searchByNumber" prefHeight="42.0" prefWidth="263.0" promptText="Buscar por número (ej. 22-1)" />
             <Pane prefHeight="200.0" prefWidth="35.0" HBox.hgrow="ALWAYS" />
-                <!-- Botón Volver alineado a la derecha -->
                 <Button fx:id="buttonBack" layoutY="10.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="86.0" text="Volver">
                <HBox.margin>
                   <Insets bottom="100.0" right="10.0" />
@@ -31,14 +28,11 @@
          </children>
       </HBox>
         
-        <!-- Área de resultados/mensajes -->
         <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="178.0">
             
             <children>
-                <!-- Texto informativo (opcional, puedes eliminarlo si no lo necesitas) -->
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="" VBox.vgrow="NEVER" />
                 
-                <!-- Panel para mostrar resultados de búsqueda -->
                 <Pane fx:id="viewProduct" VBox.vgrow="ALWAYS" />
             </children>
         </VBox>

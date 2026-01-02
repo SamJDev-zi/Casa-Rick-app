@@ -20,7 +20,6 @@
     </padding>
     
     <children>
-        <!-- Barra superior con título y botones -->
         <HBox alignment="CENTER_LEFT" spacing="10.0">
             <children>
                 <Label text="GESTIÓN DE CLIENTES" textFill="#2c3e50">
@@ -36,7 +35,6 @@
             </children>
         </HBox>
 
-        <!-- Tabla de clientes - ocupa todo el espacio disponible -->
         <TableView fx:id="tblCustomers" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="60.0" text="ID" />
@@ -49,7 +47,6 @@
             </columnResizePolicy>
         </TableView>
 
-        <!-- Botón de volver alineado a la derecha -->
         <HBox alignment="CENTER_RIGHT">
             <children>
                 <Pane HBox.hgrow="ALWAYS" />
