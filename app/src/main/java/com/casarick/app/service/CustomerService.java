@@ -1,9 +1,5 @@
 package com.casarick.app.service;
 
-import com.casarick.app.model.Customer;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -13,8 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.casarick.app.model.Customer;
+
 public class CustomerService {
-    private final String URL_API = "http://localhost:8080/api/customers";
+    private final String URL_API = "http://72.62.105.222:8080/api/customers";
     private final HttpClient client = HttpClient.newHttpClient();
 
     // 1. OBTENER TODOS LOS CLIENTES (GET)

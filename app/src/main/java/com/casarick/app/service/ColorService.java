@@ -1,9 +1,5 @@
 package com.casarick.app.service;
 
-import com.casarick.app.model.Color;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -12,8 +8,13 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.casarick.app.model.Color;
+
 public class ColorService {
-    private final String URL_API = "http://localhost:8080/api/colors";
+    private final String URL_API = "http://72.62.105.222:8080/api/colors";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Color> getAllColors() {

@@ -1,9 +1,5 @@
 package com.casarick.app.service;
 
-import com.casarick.app.model.Role;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -11,8 +7,13 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.casarick.app.model.Role;
+
 public class RoleService {
-    private final String URL_API = "http://localhost:8080/api/roles";
+    private final String URL_API = "http://72.62.105.222:8080/api/roles";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Role> getAllRoles() {

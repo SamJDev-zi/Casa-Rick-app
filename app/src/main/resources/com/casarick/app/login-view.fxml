@@ -15,8 +15,21 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.LoginController">
    <children>
-      <Pane prefHeight="200.0" prefWidth="1200.0" styleClass="banner-logo" />
-      <VBox alignment="CENTER" layoutX="403.0" layoutY="154.0" prefHeight="492.0" prefWidth="395.0" styleClass="card-login">
+      <Pane prefHeight="200.0" styleClass="banner-logo" 
+            AnchorPane.topAnchor="0.0" 
+            AnchorPane.leftAnchor="0.0" 
+            AnchorPane.rightAnchor="0.0" />
+      
+      <VBox alignment="CENTER" styleClass="card-login" 
+            AnchorPane.topAnchor="154.0" 
+            AnchorPane.bottomAnchor="154.0" 
+            AnchorPane.leftAnchor="403.0" 
+            AnchorPane.rightAnchor="403.0">
+         
+         <padding>
+            <Insets top="20.0" bottom="20.0" />
+         </padding>
+         
          <children>
             <StackPane maxHeight="254.0" maxWidth="419.0" minHeight="200.0" minWidth="250.0" prefHeight="254.0" prefWidth="419.0" styleClass="image-container">
                <children>
@@ -27,26 +40,42 @@
                   </ImageView>
                </children>
             </StackPane>
+            
             <ComboBox fx:id="selectBranch" prefWidth="150.0" promptText="Elegir Sucursal" styleClass="list-branches">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></ComboBox>
-            <TextField fx:id="nameUser" promptText="Nombre" styleClass="input-login" />
-            <TextField fx:id="lastNameUser" promptText="Apellido" styleClass="input-login" />
-            <PasswordField fx:id="passwordUser" promptText="Contraceña" styleClass="input-login">
+               </cursor>
+            </ComboBox>
+            
+            <TextField fx:id="nameUser" promptText="Nombre" styleClass="input-login">
                <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin></PasswordField>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            
+            <TextField fx:id="lastNameUser" promptText="Apellido" styleClass="input-login">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            
+            <PasswordField fx:id="passwordUser" promptText="Contraseña" styleClass="input-login">
+               <VBox.margin>
+                  <Insets top="10.0" bottom="5.0" />
+               </VBox.margin>
+            </PasswordField>
+            
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginAction" styleClass="login-button" text="Entrar">
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+            </Button>
          </children>
       </VBox>
    </children>

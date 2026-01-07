@@ -10,8 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="500.0" prefWidth="700.0" spacing="15.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.admin.CustomerController">
-    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+<VBox xmlns="http://javafx.com/javafx/25" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.casarick.app.controller.admin.CustomerController"
+      style="-fx-background-color: #f4f4f4;">
+    
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    
     <children>
         <HBox alignment="CENTER_LEFT" spacing="10.0">
             <children>
@@ -19,8 +26,12 @@
                     <font><Font name="System Bold" size="20.0" /></font>
                 </Label>
                 <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnNew" onAction="#handleCreateCustomer" style="-fx-background-color: #27ae60;" text="NUEVO CLIENTE" textFill="WHITE" />
-                <Button fx:id="btnEdit" disable="true" style="-fx-background-color: #3498db;" text="EDITAR" textFill="WHITE" />
+                <Button fx:id="btnNew" onAction="#handleCreateCustomer" 
+                       style="-fx-background-color: #27ae60; -fx-font-weight: bold;" 
+                       text="NUEVO CLIENTE" textFill="WHITE" />
+                <Button fx:id="btnEdit" disable="true" 
+                       style="-fx-background-color: #3498db; -fx-font-weight: bold;" 
+                       text="EDITAR" textFill="WHITE" />
             </children>
         </HBox>
 
@@ -31,8 +42,18 @@
                 <TableColumn fx:id="colLastName" prefWidth="200.0" text="Apellido" />
                 <TableColumn fx:id="colPhone" prefWidth="150.0" text="Teléfono" />
             </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
         </TableView>
 
-        <Button fx:id="btnBack" onAction="#handleBack" text="VOLVER" />
+        <HBox alignment="CENTER_RIGHT">
+            <children>
+                <Pane HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnBack" onAction="#handleBack" 
+                       style="-fx-background-color: #e74c3c; -fx-font-weight: bold; -fx-text-fill: white;" 
+                       text="VOLVER" />
+            </children>
+        </HBox>
     </children>
 </VBox>
