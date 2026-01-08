@@ -1,23 +1,39 @@
 package com.casarick.app.controller;
 
-import com.casarick.app.model.*;
-import com.casarick.app.service.*;
-import com.casarick.app.util.*;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.casarick.app.model.Branch;
+import com.casarick.app.model.Customer;
+import com.casarick.app.model.Inventory;
+import com.casarick.app.model.Product;
+import com.casarick.app.model.Sale;
+import com.casarick.app.model.User;
+import com.casarick.app.service.CustomerService;
+import com.casarick.app.service.InventoryService;
+import com.casarick.app.service.SaleService;
+import com.casarick.app.util.SceneSwitcher;
+import com.casarick.app.util.SessionManager;
+import com.casarick.app.util.TicketPrinter;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class SaleController {
 
@@ -35,6 +51,9 @@ public class SaleController {
     @FXML private TableColumn<Inventory, String> colInvProd;
     @FXML private TableColumn<Inventory, Integer> colInvStock;
     @FXML private TableColumn<Inventory, Double> colInvPrice;
+    @FXML private TableColumn<Inventory, String> colInvNumero;
+    @FXML private TableColumn<Inventory, String> colInvCategoria;
+    @FXML private TableColumn<Inventory, String> colInvTipo;
 
     // Columnas Carrito Actualizadas
     @FXML private TableColumn<Sale, String> colCartProd;
@@ -50,6 +69,8 @@ public class SaleController {
     private ObservableList<Customer> masterCustomers = FXCollections.observableArrayList();
     private ObservableList<Sale> cartItems = FXCollections.observableArrayList();
 
+    private FilteredList<Inventory> filteredInventoryList;
+
     private Customer selectedCustomer = null;
 
     @FXML
@@ -58,7 +79,8 @@ public class SaleController {
         setupTableColumns();
         loadInitialData();
         setupEvents();
-        setupSearchFilters();
+        //setupSearchFilters();
+        setupFiltering();
 
         btnSelectCustomer.setDisable(true); // Desactivado al inicio
         txtGlobalDescription.setText("Venta POS"); // Valor por defecto
@@ -77,8 +99,17 @@ public class SaleController {
         colCustPhone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
         colInvProd.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProduct().getName()));
-        colInvStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        colInvStock.setCellValueFactory(new PropertyValueFactory<>("stock")); 
         colInvPrice.setCellValueFactory(new PropertyValueFactory<>("salePrice"));
+        colInvNumero.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProduct() != null && data.getValue().getProduct().getBarCodeNumber() != null
+                        ? data.getValue().getProduct().getCategory().getId() + "-" + data.getValue().getProduct().getId() : "N/A"));
+        colInvCategoria.setCellValueFactory(data
+                -> new SimpleStringProperty(data.getValue().getProduct() != null && data.getValue().getProduct().getCategory() != null
+                        ? data.getValue().getProduct().getCategory().getName() : "N/A"));
+
+        colInvTipo.setCellValueFactory(data
+                -> new SimpleStringProperty(data.getValue().getProduct() != null && data.getValue().getProduct().getType() != null
+                        ? data.getValue().getProduct().getType().getName() : "N/A"));
 
         // Configuración Carrito
         colCartProd.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInventoryDTO().getProduct().getName()));
@@ -237,15 +268,53 @@ public class SaleController {
 
     private void loadInitialData() {
         Branch currentBranch = SessionManager.getInstance().getCurrentBranch();
+        
+
         masterInventory.setAll(inventoryService.getWithStock().stream()
                 .filter(i -> i.getBranch().getId().equals(currentBranch.getId()))
                 .toList());
-        tblInventory.setItems(masterInventory);
+        filteredInventoryList = new FilteredList<>(masterInventory, p -> true);
+
+        // 5. Configurar la tabla con la lista filtrada
+        SortedList<Inventory> sortedList = new SortedList<>(filteredInventoryList);
+
+        tblInventory.setItems(sortedList);
         masterCustomers.setAll(customerService.getAllCustomers());
         tblCustomers.setItems(masterCustomers);
     }
 
-    private void setupSearchFilters() {
+    private void setupFiltering() {
+        txtSearchProduct.textProperty().addListener((observable, oldValue, newValue) -> {
+            applyFilters();
+        });
+    }
+    @FXML
+    private void applyFilters() {
+        filteredInventoryList.setPredicate(inventory -> {
+            Product product = inventory.getProduct();
+            if (product == null) {
+                return false;
+            }
+
+            String searchText = txtSearchProduct.getText().toLowerCase();
+            if (searchText != null && !searchText.isEmpty()) {
+                boolean matchesName = product.getName().toLowerCase().contains(searchText);
+                boolean matchesBarcode = product.getBarCodeNumber() != null
+                        && product.getBarCodeNumber().toLowerCase().contains(searchText);
+                boolean matchesCategory = product.getCategory() != null
+                        && product.getCategory().getName().toLowerCase().contains(searchText);
+                String productNumber = product.getCategory().getId() + "-" + product.getId();
+                boolean matchesNumber = productNumber.contains(searchText);
+                if (!matchesName && !matchesBarcode && !matchesCategory && !matchesNumber) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    }
+
+    /*private void setupSearchFilters() {
+        
         FilteredList<Inventory> filteredData = new FilteredList<>(masterInventory, p -> true);
         txtSearchProduct.textProperty().addListener((obs, old, newValue) -> {
             filteredData.setPredicate(inv -> {
@@ -255,7 +324,7 @@ public class SaleController {
             });
         });
         tblInventory.setItems(filteredData);
-    }
+    }*/
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
