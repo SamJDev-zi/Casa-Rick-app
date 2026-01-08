@@ -243,8 +243,9 @@ public class InventoryController {
                         && product.getBarCodeNumber().toLowerCase().contains(searchText);
                 boolean matchesCategory = product.getCategory() != null
                         && product.getCategory().getName().toLowerCase().contains(searchText);
-
-                if (!matchesName && !matchesBarcode && !matchesCategory) {
+                String productNumber = product.getCategory().getId() + "-" + product.getId();
+                boolean matchesNumber = productNumber.contains(searchText);
+                if (!matchesName && !matchesBarcode && !matchesCategory && !matchesNumber) {
                     return false;
                 }
             }

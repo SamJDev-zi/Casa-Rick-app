@@ -27,7 +27,11 @@ public class ProductController {
     @FXML
     private Button buttonBack;
 
-    @FXML private TextField productName, stockField, costPriceField, salePriceField, barCodeField;
+    @FXML private TextField productName,
+            stockField,
+            costPriceField,
+            salePriceField,
+            barCodeField;
     @FXML private ComboBox<Category> categoryMenu;
     @FXML private ComboBox<Type> typeMenu;
     @FXML private ComboBox<Industry> industryMenu;
@@ -115,17 +119,6 @@ public class ProductController {
         } else {
             System.out.println("No se encontró ninguna cámara de DroidCam activa.");
         }
-
-        /*webcam = Webcam.getDefault();
-        if (webcam != null) {
-            webcam.setViewSize(webcam.getViewSizes()[0]); // Tamaño estándar
-            if (!webcam.isOpen()) webcam.open();
-
-            captureTask = new WebcamCaptureTask(liveView, webcam);
-            Thread thread = new Thread(captureTask);
-            thread.setDaemon(true);
-            thread.start();
-        }*/
     }
 
     @FXML
@@ -192,13 +185,17 @@ public class ProductController {
     @FXML
     void handleCreateProduct(ActionEvent event) {
         if (!isFormValid()) {
-            return; // Detener la ejecución si el formulario no es válido
+            return;
         }
 
         try {
-            // 1. Crear Objeto Producto
             Product product = new Product();
-            product.setName(productName.getText());
+
+            String productName = categoryMenu.getValue().getName() + " " +
+                    typeMenu.getValue().getName() + " " +
+                    industryMenu.getValue();
+
+            product.setName(productName);
             product.setCategory(categoryMenu.getValue());
             product.setType(typeMenu.getValue());
             product.setIndustry(industryMenu.getValue());
@@ -206,6 +203,8 @@ public class ProductController {
             product.setSize(sizes.getValue());
             product.setBarCodeNumber(barCodeField.getText());
             product.setPhotoUrl(photoPathLabel.getText());
+
+            this.productName.setText(productName);
 
             // 2. Guardar Producto en API y obtener el objeto con ID
             Product savedProduct = productService.createNewProduct(product);
@@ -322,7 +321,6 @@ public class ProductController {
         String errorMsg = "";
 
         // Validar TextFields
-        if (productName.getText().trim().isEmpty()) errorMsg += "- Nombre del producto\n";
         if (stockField.getText().trim().isEmpty()) errorMsg += "- Stock inicial\n";
         if (costPriceField.getText().trim().isEmpty()) errorMsg += "- Precio Costo\n";
         if (salePriceField.getText().trim().isEmpty()) errorMsg += "- Precio Venta\n";
