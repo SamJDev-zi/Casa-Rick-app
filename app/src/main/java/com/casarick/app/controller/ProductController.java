@@ -27,7 +27,7 @@ public class ProductController {
     @FXML
     private Button buttonBack;
 
-    @FXML private TextField productName,
+    @FXML private TextField product,
             stockField,
             costPriceField,
             salePriceField,
@@ -152,10 +152,10 @@ public class ProductController {
             );
 
             // Nombre sugerido inicial
-            fileChooser.setInitialFileName("prod_" + productName.getText().replace(" ", "_") + "_" + System.currentTimeMillis() + ".png");
+            fileChooser.setInitialFileName("prod_" + product.getText().replace(" ", "_") + "_" + System.currentTimeMillis() + ".png");
 
             // Abrir la ventana de guardado
-            File file = fileChooser.showSaveDialog(productName.getScene().getWindow());
+            File file = fileChooser.showSaveDialog(product.getScene().getWindow());
 
 
             if (file != null) {
@@ -191,11 +191,9 @@ public class ProductController {
         try {
             Product product = new Product();
 
-            String productName = categoryMenu.getValue().getName() + " " +
-                    typeMenu.getValue().getName() + " " +
-                    industryMenu.getValue();
 
-            product.setName(productName);
+
+
             product.setCategory(categoryMenu.getValue());
             product.setType(typeMenu.getValue());
             product.setIndustry(industryMenu.getValue());
@@ -204,7 +202,13 @@ public class ProductController {
             product.setBarCodeNumber(barCodeField.getText());
             product.setPhotoUrl(photoPathLabel.getText());
 
-            this.productName.setText(productName);
+            String productName = categoryMenu.getValue().getName() + " " +
+                    typeMenu.getValue().getName() + " " +
+                    industryMenu.getValue();
+
+            product.setName(productName);
+
+            this.product.setText(productName);
 
             // 2. Guardar Producto en API y obtener el objeto con ID
             Product savedProduct = productService.createNewProduct(product);
@@ -229,7 +233,6 @@ public class ProductController {
 
     // Métodos de apoyo
     private void clearForm() {
-        productName.clear();
         stockField.clear();
         costPriceField.clear();
         salePriceField.clear();

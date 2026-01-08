@@ -17,22 +17,20 @@ public class LabelPrinter implements JRDataSource {
 
     @Override
     public boolean next() throws JRException {
-        index++;
-        return (index < inventoryList.size());
+        return ++index < inventoryList.size();
     }
 
     @Override
     public Object getFieldValue(JRField jrField) throws JRException {
-        Inventory currentItem = inventoryList.get(index);
-        String fieldName = jrField.getName();
-
-        return switch (fieldName) {
-            case "id_category" -> currentItem.getProduct().getCategory().getId();
-            case "id_product" -> currentItem.getProduct().getId();
-            case "barCode" -> currentItem.getProduct().getBarCodeNumber();
-            case "sale_price" -> currentItem.getSalePrice();
-            case "category_name" -> currentItem.getProduct().getCategory().getName();
-            case "product_name" -> currentItem.getProduct().getName();
+        Inventory currentInv = inventoryList.get(index);
+        return switch (jrField.getName()) {
+            case "inventory_id" -> currentInv.getId();
+            case "categoty_id"  -> currentInv.getProduct().getCategory().getId();
+            case "product_id"   -> currentInv.getProduct().getId();
+            case "barCode"      -> currentInv.getProduct().getBarCodeNumber();
+            case "category_name"-> currentInv.getProduct().getCategory().getName();
+            case "type_name"    -> currentInv.getProduct().getName();
+            case "price"        -> currentInv.getSalePrice();
             default -> null;
         };
     }

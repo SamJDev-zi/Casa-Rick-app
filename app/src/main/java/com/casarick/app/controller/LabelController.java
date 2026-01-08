@@ -109,7 +109,7 @@ public class LabelController {
             LabelPrinter dataSource = new LabelPrinter(displayList);
 
             JasperReport report = (JasperReport) net.sf.jasperreports.engine.util.JRLoader.loadObject(
-                    getClass().getResourceAsStream("/reports/Blank_A4_Landscape_Table_Based.jasper")
+                    getClass().getResourceAsStream("/reports/etiquetas_casa_rick.jasper")
             );
 
             JasperPrint print = JasperFillManager.fillReport(report, null, dataSource);

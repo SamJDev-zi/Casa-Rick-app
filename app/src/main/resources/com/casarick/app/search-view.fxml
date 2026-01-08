@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="704.0" prefWidth="1095.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.SearchController">
+<AnchorPane prefHeight="650.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.SearchController">
    <children>
       <Pane prefHeight="110.0" prefWidth="1095.0">
          <children>
@@ -23,7 +23,7 @@
             <Button fx:id="clearButton" layoutX="697.0" layoutY="43.0" mnemonicParsing="false" text="Limpiar Filtros" />
          </children>
       </Pane>
-       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="110.0" prefHeight="590.0" prefWidth="1095.0" style="-fx-background-color: transparent;" vbarPolicy="AS_NEEDED">
+       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="110.0" prefHeight="523.0" prefWidth="1095.0" style="-fx-background-color: transparent;" vbarPolicy="AS_NEEDED">
            <content>
                <GridPane fx:id="gridCards" hgap="20.0" vgap="20.0">
                    <columnConstraints>

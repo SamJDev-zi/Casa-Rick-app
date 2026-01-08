@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.ProductController">
+<HBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.ProductController">
     
     <Pane prefWidth="400.0" HBox.hgrow="SOMETIMES">
         <children>
                 
-                <ComboBox fx:id="categoryMenu" layoutX="89.0" layoutY="166.0" prefWidth="150.0" promptText="Categoria" />
+                <ComboBox fx:id="categoryMenu" layoutX="89.0" layoutY="72.0" prefWidth="150.0" promptText="Categoria" />
                 
-                <ComboBox fx:id="typeMenu" layoutX="89.0" layoutY="204.0" prefWidth="150.0" promptText="Tipo" />
+                <ComboBox fx:id="typeMenu" layoutX="89.0" layoutY="110.0" prefWidth="150.0" promptText="Tipo" />
                 
-                <ComboBox fx:id="industryMenu" layoutX="90.0" layoutY="241.0" prefWidth="150.0" promptText="Industria" />
+                <ComboBox fx:id="industryMenu" layoutX="90.0" layoutY="147.0" prefWidth="150.0" promptText="Industria" />
 
                 <Label layoutX="90.0" layoutY="370.0" text="Inventario Inicial">
                     <font><Font size="14.0" /></font>
@@ -33,21 +33,22 @@
                 
                 <TextField fx:id="stockField" layoutX="89.0" layoutY="403.0" prefHeight="25.0" prefWidth="150.0" promptText="Stock Inicial" />
 
-                <Button fx:id="addCategory" layoutX="249.0" layoutY="166.0" mnemonicParsing="false" onAction="#handleAddCategory" text="+" />
+                <Button fx:id="addCategory" layoutX="249.0" layoutY="72.0" mnemonicParsing="false" onAction="#handleAddCategory" text="+" />
                 
-                <Button fx:id="addType" layoutX="249.0" layoutY="204.0" mnemonicParsing="false" onAction="#handleAddType" text="+" />
+                <Button fx:id="addType" layoutX="249.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleAddType" text="+" />
                 
-                <Button fx:id="addIndustry" layoutX="249.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleAddIndustry" text="+" />
+                <Button fx:id="addIndustry" layoutX="249.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleAddIndustry" text="+" />
 
                 <Button fx:id="createButton" layoutX="249.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleCreateProduct" prefHeight="25.0" prefWidth="144.0" text="Crear Producto" />
                 
                 <TextField fx:id="barCodeField" editable="false" layoutX="90.0" layoutY="520.0" prefHeight="25.0" prefWidth="150.0" promptText="Código de Barras" />
                 
-                <ComboBox fx:id="colorMenu" layoutX="89.0" layoutY="279.0" prefWidth="150.0" promptText="Color" />
+                <ComboBox fx:id="colorMenu" layoutX="89.0" layoutY="185.0" prefWidth="150.0" promptText="Color" />
                 
-                <Button fx:id="addColor" layoutX="249.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleAddColor" prefHeight="25.0" prefWidth="24.0" text="+" />
+                <Button fx:id="addColor" layoutX="249.0" layoutY="185.0" mnemonicParsing="false" onAction="#handleAddColor" prefHeight="25.0" prefWidth="24.0" text="+" />
                 
-                <ComboBox fx:id="sizes" layoutX="90.0" layoutY="317.0" prefWidth="150.0" promptText="Talla" />
+                <ComboBox fx:id="sizes" layoutX="90.0" layoutY="223.0" prefWidth="150.0" promptText="Talla" />
+         <TextField fx:id="product" focusTraversable="false" layoutX="90.0" layoutY="290.0" />
             </children>
     </Pane>
     
