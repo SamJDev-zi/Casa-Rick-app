@@ -105,16 +105,8 @@ public class LabelController {
     private void printLabels() {
         if (displayList.isEmpty()) return;
 
-        // Aquí es donde aplicamos la regla del Stock para el reporte
-        List<Inventory> expandedList = new ArrayList<>();
-        for (Inventory inv : displayList) {
-            for (int i = 0; i < inv.getStock(); i++) {
-                expandedList.add(inv);
-            }
-        }
-
         try {
-            LabelPrinter dataSource = new LabelPrinter(expandedList);
+            LabelPrinter dataSource = new LabelPrinter(displayList);
 
             JasperReport report = (JasperReport) net.sf.jasperreports.engine.util.JRLoader.loadObject(
                     getClass().getResourceAsStream("/reports/Blank_A4_Landscape_Table_Based.jasper")
@@ -130,7 +122,6 @@ public class LabelController {
 
     @FXML
     public void buttonBack() {
-
         Stage currentStage = (Stage) buttonBack.getScene().getWindow();
         String nextViewFXML = "home-view.fxml";
         SceneSwitcher.switchScene(currentStage, nextViewFXML);

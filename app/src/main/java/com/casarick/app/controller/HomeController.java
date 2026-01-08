@@ -71,14 +71,14 @@ public class HomeController {
 
         // Relación Permiso -> Botón
         setupButtonPermission(newSale, "permiso_venta", userPermissions);
-        setupButtonPermission(newReservation, "permiso_reserva", userPermissions);
-        setupButtonPermission(printTicket, "permiso_impresion", userPermissions);
         setupButtonPermission(registerProduct, "permiso_registrar_producto", userPermissions);
-        setupButtonPermission(searchProduct, "permiso_inventario", userPermissions); // Según tu lista
-        setupButtonPermission(inventory, "permiso_inventario", userPermissions);
         setupButtonPermission(register, "permiso_caja", userPermissions);
+        setupButtonPermission(searchProduct, "permiso_inventario", userPermissions); // Según tu lista
+        setupButtonPermission(printTicket, "permiso_impresion", userPermissions);
+        setupButtonPermission(inventory, "permiso_inventario", userPermissions);
         setupButtonPermission(editSale, "permiso_editar_venta", userPermissions);
         setupButtonPermission(editReservation, "permiso_editar_reserva", userPermissions);
+        setupButtonPermission(newReservation, "permiso_reserva", userPermissions);
     }
 
     /**
@@ -87,7 +87,7 @@ public class HomeController {
     private void setupButtonPermission(Button button, String permissionRequired, List<String> userPerms) {
         boolean hasPermission = userPerms.contains(permissionRequired);
         button.setVisible(hasPermission);
-        button.setManaged(hasPermission); // Elimina el espacio visual en el GridPane
+        button.setManaged(hasPermission);
     }
 
     @FXML
