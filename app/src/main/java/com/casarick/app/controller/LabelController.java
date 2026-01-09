@@ -39,7 +39,6 @@ public class LabelController {
         labelGrid.setPadding(new javafx.geometry.Insets(10)); // Margen interno
 
         labelGrid.getChildren().clear();
-        displayList.clear();
 
         Long branchId = SessionManager.getInstance().getCurrentBranch().getId();
         // Llamada a tu API ya corregida
