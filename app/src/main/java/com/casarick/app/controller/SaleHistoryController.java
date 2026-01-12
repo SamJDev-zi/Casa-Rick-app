@@ -1,22 +1,28 @@
 package com.casarick.app.controller;
 
-import com.casarick.app.model.Sale;
-import com.casarick.app.service.SaleService;
-import com.casarick.app.util.SessionManager;
-import com.casarick.app.util.SceneSwitcher;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import com.casarick.app.model.Sale;
+import com.casarick.app.service.SaleService;
+import com.casarick.app.util.SceneSwitcher;
+import com.casarick.app.util.SessionManager;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class SaleHistoryController {
 
@@ -70,12 +76,10 @@ public class SaleHistoryController {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        colDate.setCellValueFactory(cellData -> {
-            LocalDateTime dt = cellData.getValue().getCreatedAt();
-            // Si sale "Sin Fecha", el problema es el mapeo en el Service
-            return new SimpleStringProperty(dt != null ? dt.format(formatter) : "Sin Fecha");
-        });
+        colDate.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
+
+        
         colProduct.setCellValueFactory(cellData -> {
             if (cellData.getValue().getInventoryDTO() != null &&
                     cellData.getValue().getInventoryDTO().getProduct() != null) {
@@ -90,15 +94,19 @@ public class SaleHistoryController {
             }
             return new SimpleStringProperty("Admin");
         });
-
         tblSales.setItems(saleList);
     }
-
+/*(cellData -> {
+            LocalDateTime dt = cellData.getValue().getCreatedAt();
+            // Si sale "Sin Fecha", el problema es el mapeo en el Service
+            return new SimpleStringProperty(dt != null ? dt.format(formatter) : "Sin Fecha");
+        });*/
     private void loadSales() {
         if (dpStart.getValue() == null || dpEnd.getValue() == null) {
             showAlert("Error", "Debe seleccionar un rango de fechas.");
             return;
         }
+        
 
         // Definir el rango del día (Inicio: 00:00:00, Fin: 23:59:59)
         LocalDateTime startRange = dpStart.getValue().atStartOfDay();
@@ -137,6 +145,11 @@ public class SaleHistoryController {
                 .sum();
 
         lblTotalPeriodo.setText(String.format("$%.2f", total));
+        saleList.forEach(s ->
+        System.out.println("Fecha cargada: " + s.getCreatedAt())
+        );
+
+        System.out.println("HHHHHHHHHHHHHHHHHHHHH" + tblSales.getItems().get(2).getCreatedAt()+ tblSales.getItems().get(2).getSaleTotal()+ tblSales.getItems().get(2).getId());
     }
 
     private void handleBack() {

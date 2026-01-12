@@ -1,16 +1,34 @@
 package com.casarick.app.controller;
 
-import com.casarick.app.model.*;
-import com.casarick.app.service.*;
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.casarick.app.model.Branch;
+import com.casarick.app.model.Category;
+import com.casarick.app.model.Industry;
+import com.casarick.app.model.Inventory;
+import com.casarick.app.model.Product;
+import com.casarick.app.model.Type;
+import com.casarick.app.service.CategoryService;
+import com.casarick.app.service.IndustryService;
+import com.casarick.app.service.InventoryService;
+import com.casarick.app.service.TypeService;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -19,10 +37,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class SearchController {
 
@@ -264,6 +278,7 @@ public class SearchController {
         return vb;
     }
 
+    @FXML
     private void clearFilters() {
         searchNumber.clear();
         categoryMenu.getSelectionModel().selectFirst();
@@ -274,8 +289,6 @@ public class SearchController {
 
     @FXML
     private void handleSearchByNumber() {
-        // Este método estaba en tu código original para el botón 'Enter'
-        // Ahora redirige a applyFilters para mantener consistencia
         applyFilters();
     }
 

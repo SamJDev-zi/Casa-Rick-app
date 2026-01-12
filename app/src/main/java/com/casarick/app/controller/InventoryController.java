@@ -87,7 +87,7 @@ public class InventoryController {
     private final CategoryService categoryService = new CategoryService();
     private final TypeService typeService = new TypeService();
     private final IndustryService industryService = new IndustryService();
-
+ 
     // Listas para filtros
     private ObservableList<Inventory> originalInventoryList;
     private FilteredList<Inventory> filteredInventoryList;

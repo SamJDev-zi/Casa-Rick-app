@@ -79,7 +79,6 @@ public class SaleController {
         setupTableColumns();
         loadInitialData();
         setupEvents();
-        //setupSearchFilters();
         setupFiltering();
 
         btnSelectCustomer.setDisable(true); // Desactivado al inicio
@@ -119,33 +118,6 @@ public class SaleController {
 
         tblCart.setItems(cartItems);
     }
-
-    /*private void setupEvents() {
-        // Lógica de selección de cliente (Botón)
-        tblCustomers.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            btnSelectCustomer.setDisable(newVal == null);
-        });
-
-        btnSelectCustomer.setOnAction(e -> {
-            selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
-            lblSelectedCustomer.setText("Cliente: " + selectedCustomer.getName() + " " + selectedCustomer.getLastName());
-            lblSelectedCustomer.setStyle("-fx-text-fill: #27ae60; -fx-font-weight: bold;");
-        });
-
-        // Doble clic en inventario (Solo pide descuento)
-        tblInventory.setRowFactory(tv -> {
-            TableRow<Inventory> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    promptDiscountOnly(row.getItem());
-                }
-            });
-            return row;
-        });
-
-        btnCompleteSale.setOnAction(e -> handleProcessSale());
-        btnBack.setOnAction(e -> SceneSwitcher.switchScene((Stage) btnBack.getScene().getWindow(), "home-view.fxml"));
-    }*/
 
     private void promptDetails(Inventory inv) {
         // 1. Pedir Descuento
@@ -312,19 +284,6 @@ public class SaleController {
             return true;
         });
     }
-
-    /*private void setupSearchFilters() {
-        
-        FilteredList<Inventory> filteredData = new FilteredList<>(masterInventory, p -> true);
-        txtSearchProduct.textProperty().addListener((obs, old, newValue) -> {
-            filteredData.setPredicate(inv -> {
-                if (newValue == null || newValue.isEmpty()) return true;
-                String lower = newValue.toLowerCase();
-                return inv.getProduct().getName().toLowerCase().contains(lower);
-            });
-        });
-        tblInventory.setItems(filteredData);
-    }*/
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.HomeController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.HomeController">
    <children>
       <Pane prefWidth="319.0" styleClass="banner-logo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,7 +29,7 @@
          </children>
       </Pane>
       
-      <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="36.0" prefWidth="166.0" styleClass="logout-button" text="Cerrar Sesión" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="22.0" />
+      <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="36.0" prefWidth="166.0" style="-fx-font-weight: bold;" styleClass="logout-button" text="Cerrar Sesión" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="22.0" />
       
       <GridPane alignment="CENTER" styleClass="grip-home" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="113.0">
          <columnConstraints>
@@ -41,52 +43,150 @@
             <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
-            <Button fx:id="newSale" alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaleAction" styleClass="login-button" text="Nueva venta" GridPane.halignment="CENTER">
-               <padding>
-                  <Insets right="70.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="newReservation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleReservationAction" styleClass="login-button" text="Nueva Reserva" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-               <padding>
-                  <Insets right="70.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="printTicket" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlePrintTicketAction" styleClass="login-button" text="Imprimir Etiqueta" GridPane.columnIndex="2" GridPane.halignment="CENTER">
-               <padding>
-                  <Insets right="50.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="registerProduct" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegisterProductAction" styleClass="login-button" text="Nuevo producto" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <padding>
-                  <Insets right="50.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="searchProduct" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSearchProductAction" styleClass="login-button" text="Buscar Producto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <padding>
-                  <Insets right="50.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="inventory" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleInventoryAction" styleClass="login-button" text="Inventario" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <padding>
-                  <Insets right="90.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="register" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegisterAction" styleClass="login-button" text="Caja" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <padding>
-                  <Insets right="100.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="editSale" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="login-button" text="Editar venta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <padding>
-                  <Insets right="70.0" top="100.0" />
-               </padding>
-            </Button>
-            <Button fx:id="editReservation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEditReservationAction" styleClass="login-button" text="Editar reserva" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <padding>
-                  <Insets right="70.0" top="100.0" />
-               </padding>
-            </Button>
-         </children>
+    <!-- Nueva venta -->
+    <Button fx:id="newSale" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSaleAction" styleClass="login-button" GridPane.halignment="CENTER">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="102.0" fitWidth="233.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/nueva-venta.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Nueva reserva -->
+    <Button fx:id="newReservation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleReservationAction" styleClass="login-button" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="150.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/nueva-reserva.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Imprimir etiqueta -->
+    <Button fx:id="printTicket" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlePrintTicketAction" styleClass="login-button" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/imprimir-etiqueta.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Nuevo producto -->
+    <Button fx:id="registerProduct" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegisterProductAction" styleClass="login-button" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/nuevo-producto.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Buscar producto -->
+    <Button fx:id="searchProduct" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSearchProductAction" styleClass="login-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/buscar-producto.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Inventario -->
+    <Button fx:id="inventory" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleInventoryAction" styleClass="login-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/inventario.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Caja -->
+    <Button fx:id="register" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegisterAction" styleClass="login-button" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/caja.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Editar venta -->
+    <Button fx:id="editSale" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="login-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <graphic>
+            <StackPane>
+                <ImageView fitHeight="125.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/editar-venta.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+    
+    <!-- Editar reserva -->
+    <Button fx:id="editReservation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEditReservationAction" styleClass="login-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <graphic>
+            <StackPane prefHeight="112.0" prefWidth="197.0">
+                <ImageView fitHeight="120.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                    <image>
+                        <Image url="@../../../img/editar-reserva.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+        </graphic>
+        <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </GridPane.margin>
+    </Button>
+</children>
       </GridPane>
       
       <VBox alignment="CENTER_LEFT" spacing="20.0" AnchorPane.leftAnchor="369.0" AnchorPane.topAnchor="40.0">
