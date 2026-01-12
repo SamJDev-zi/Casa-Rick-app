@@ -1,22 +1,29 @@
 package com.casarick.app.controller;
 
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import com.casarick.app.model.Branch;
 import com.casarick.app.model.Reservation;
 import com.casarick.app.service.ReservationService;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class EditReservationController {
 
@@ -28,6 +35,7 @@ public class EditReservationController {
 
     @FXML private VBox paneEdit;
     @FXML private ComboBox<String> cbStatus;
+    @FXML private ComboBox<String> cbStatusFilter;
     @FXML private TextField txtBalance;
     @FXML private TextArea txtDescription;
     @FXML private Button btnBack;
@@ -38,9 +46,10 @@ public class EditReservationController {
 
     @FXML
     public void initialize() {
-        cbStatus.setItems(FXCollections.observableArrayList("PENDIENTE", "CANCELADA", "TERMINADA"));
+        cbStatus.setItems(FXCollections.observableArrayList("TODAS","PENDIENTE", "CANCELADA"));
+        cbStatusFilter.setItems(FXCollections.observableArrayList("TODAS","PENDIENTE", "CANCELADA", "TERMINADA"));
         setupTable();
-        loadReservations();
+        loadReservations("TODAS");
 
         // Listener para seleccionar fila
         tblReservations.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -48,6 +57,7 @@ public class EditReservationController {
                 showReservationDetails(newVal);
             }
         });
+        filtering();
     }
 
     private void setupTable() {
@@ -76,7 +86,7 @@ public class EditReservationController {
         );
     }
 
-    private void loadReservations() {
+    private void loadReservations(String reservation) {
         // 1. Validar que la sucursal de la sesión exista
         Branch currentBranch = SessionManager.getInstance().getCurrentBranch();
         if (currentBranch == null || currentBranch.getId() == null) {
@@ -89,12 +99,22 @@ public class EditReservationController {
         // 2. Traer todas y filtrar con seguridad (Null-safe)
         List<Reservation> allReservations = service.getAllReservations();
 
-        List<Reservation> filteredList = allReservations.stream()
+        List<Reservation> filteredList;
+        if("TODAS".equalsIgnoreCase(reservation)){
+            filteredList = allReservations.stream()
                 .filter(r -> r.getBranch() != null && r.getBranch().getId() != null) // Validación de seguridad
                 .filter(r -> r.getBranch().getId().equals(currentBranchId))
-                .filter(r -> "PENDIENTE".equalsIgnoreCase(r.getStatus()))
+                //.filter(r -> "PENDIENTE".equalsIgnoreCase(r.getStatus()))
+                .toList();
+        }else{
+            filteredList = allReservations.stream()
+                .filter(r -> r.getBranch() != null && r.getBranch().getId() != null) // Validación de seguridad
+                .filter(r -> r.getBranch().getId().equals(currentBranchId))
+                .filter(r -> reservation.equalsIgnoreCase(r.getStatus()))
                 .toList();
 
+        }
+        
         reservationData.setAll(filteredList);
         tblReservations.setItems(reservationData);
     }
@@ -128,7 +148,7 @@ public class EditReservationController {
 
             if (success) {
                 showAlert("Éxito", "Reserva actualizada correctamente.");
-                loadReservations(); // Recargar tabla
+                loadReservations("TODAS"); // Recargar tabla
                 paneEdit.setDisable(true);
                 tblReservations.getSelectionModel().clearSelection();
             } else {
@@ -150,5 +170,18 @@ public class EditReservationController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    private void filtering(){
+        cbStatusFilter.setOnAction(e -> applyFilters());
+    }
+    @FXML
+    private void applyFilters() {
+        String selectedCategory = cbStatusFilter.getValue();
+        loadReservations(selectedCategory);
+    }
+
+    @FXML
+    private void handleStatusFilter() {
+        applyFilters();
     }
 }

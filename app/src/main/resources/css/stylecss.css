@@ -84,6 +84,16 @@
     -fx-background-color: red;
 }
 
+.edit-button {
+    -fx-text-fill: white;
+    -fx-background-color: #6495ED;
+}
+
+.acept-button {
+    -fx-text-fill: white;
+    -fx-background-color:  #27ae60;
+}
+
 .grip-home {
     -fx-hgap: 5px;
     -fx-vgap: 5px;

@@ -10,10 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/25" 
-      xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="com.casarick.app.controller.admin.CustomerController"
-      style="-fx-background-color: #f4f4f4;">
+<VBox style="-fx-background-color: #f4f4f4;" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.admin.CustomerController">
     
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -26,12 +23,8 @@
                     <font><Font name="System Bold" size="20.0" /></font>
                 </Label>
                 <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnNew" onAction="#handleCreateCustomer" 
-                       style="-fx-background-color: #27ae60; -fx-font-weight: bold;" 
-                       text="NUEVO CLIENTE" textFill="WHITE" />
-                <Button fx:id="btnEdit" disable="true" 
-                       style="-fx-background-color: #3498db; -fx-font-weight: bold;" 
-                       text="EDITAR" textFill="WHITE" />
+                <Button fx:id="btnNew" onAction="#handleCreateCustomer" style="-fx-background-color: #27ae60; -fx-font-weight: bold;" text="NUEVO CLIENTE" textFill="WHITE" />
+                <Button fx:id="btnEdit" disable="true" style="-fx-font-weight: bold;" styleClass="edit-button" text="EDITAR" textFill="WHITE" />
             </children>
         </HBox>
 
@@ -50,9 +43,7 @@
         <HBox alignment="CENTER_RIGHT">
             <children>
                 <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnBack" onAction="#handleBack" 
-                       style="-fx-background-color: #e74c3c; -fx-font-weight: bold; -fx-text-fill: white;" 
-                       text="VOLVER" />
+                <Button fx:id="btnBack" onAction="#handleBack" style="-fx-font-weight: bold; -fx-text-fill: white;" styleClass="logout-button" text="VOLVER" />
             </children>
         </HBox>
     </children>

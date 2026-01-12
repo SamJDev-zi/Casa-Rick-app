@@ -8,37 +8,60 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.SearchController">
-   <children>
-      <Pane prefHeight="110.0" prefWidth="1095.0">
-         <children>
-            <Button fx:id="backButton" layoutX="1012.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleBack" text="Volver" />
-            <ComboBox fx:id="categoryMenu" layoutX="14.0" layoutY="43.0" prefWidth="150.0" promptText="Categorias" />
-            <ComboBox fx:id="typeMenu" layoutX="175.0" layoutY="43.0" prefWidth="150.0" promptText="Tipos" />
-            <ComboBox fx:id="industryMenu" layoutX="340.0" layoutY="43.0" prefWidth="150.0" promptText="Industrias" />
-            <TextField fx:id="searchNumber" layoutX="507.0" layoutY="43.0" onAction="#handleSearchByNumber" promptText="numero Ej. 1-1" />
-            <Button fx:id="clearButton" layoutX="697.0" layoutY="43.0" mnemonicParsing="false" text="Limpiar Filtros" />
-         </children>
-      </Pane>
-       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutY="110.0" prefHeight="523.0" prefWidth="1095.0" style="-fx-background-color: transparent;" vbarPolicy="AS_NEEDED">
-           <content>
-               <GridPane fx:id="gridCards" hgap="20.0" vgap="20.0">
-                   <columnConstraints>
-                       <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
-                       <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
-                       <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
-                   </columnConstraints>
-                   <rowConstraints>
-                       <RowConstraints vgrow="NEVER" />
-                   </rowConstraints>
-                   <padding>
-                       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                   </padding>
-               </GridPane>
-           </content>
-       </ScrollPane>
-   </children>
+<AnchorPane prefHeight="650.0" prefWidth="1200.0" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.SearchController">
+    <VBox spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        
+        <padding>
+            <Insets bottom="10.0" />
+        </padding>
+        
+        <children>
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+                <children>
+                    <ComboBox fx:id="categoryMenu" prefWidth="180.0" promptText="Categorías" HBox.hgrow="SOMETIMES" />
+                    
+                    <ComboBox fx:id="typeMenu" prefWidth="180.0" promptText="Tipos" HBox.hgrow="SOMETIMES" />
+                    
+                    <ComboBox fx:id="industryMenu" prefWidth="180.0" promptText="Industrias" HBox.hgrow="SOMETIMES" />
+                    
+                    <TextField fx:id="searchNumber" onAction="#handleSearchByNumber" prefWidth="180.0" promptText="Número Ej. 1-1" HBox.hgrow="SOMETIMES" />
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                <children>
+                    <Pane HBox.hgrow="ALWAYS" />
+                    
+                    <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearFilters" prefHeight="35.0" prefWidth="140.0" style="-fx-font-weight: bold;" styleClass="edit-button" text="Limpiar Filtros" />
+                    
+                    <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBack" prefHeight="35.0" prefWidth="100.0" style="-fx-font-weight: bold;" styleClass="logout-button" text="Volver" />
+                </children>
+            </HBox>
+        </children>
+    </VBox>
+
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
+        
+        <content>
+            <GridPane fx:id="gridCards" hgap="20.0" vgap="20.0">
+                
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" percentWidth="33.33" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" percentWidth="33.33" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" percentWidth="33.33" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="300.0" vgrow="NEVER" />
+                </rowConstraints>
+                
+                <padding>
+                    <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+            </GridPane>
+        </content>
+    </ScrollPane>
 </AnchorPane>
