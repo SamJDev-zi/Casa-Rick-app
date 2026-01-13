@@ -6,7 +6,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.casarick.app.model.Product;
 import com.casarick.app.model.Sale;
+import com.casarick.app.model.User;
 import com.casarick.app.service.SaleService;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
@@ -70,87 +72,82 @@ public class SaleHistoryController {
     }
 
     private void setupTable() {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colQty.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        colTotal.setCellValueFactory(new PropertyValueFactory<>("saleTotal"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+    colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+    colQty.setCellValueFactory(new PropertyValueFactory<>("stock"));
+    colTotal.setCellValueFactory(new PropertyValueFactory<>("saleTotal"));
+    colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        colDate.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-
-
-        
-        colProduct.setCellValueFactory(cellData -> {
-            if (cellData.getValue().getInventoryDTO() != null &&
-                    cellData.getValue().getInventoryDTO().getProduct() != null) {
-                return new SimpleStringProperty(cellData.getValue().getInventoryDTO().getProduct().getName());
-            }
-            return new SimpleStringProperty("N/A");
-        });
-
-        colUser.setCellValueFactory(cellData -> {
-            if (cellData.getValue().getUserDTO() != null) {
-                return new SimpleStringProperty(cellData.getValue().getUserDTO().getName());
-            }
-            return new SimpleStringProperty("Admin");
-        });
-        tblSales.setItems(saleList);
-    }
-/*(cellData -> {
-            LocalDateTime dt = cellData.getValue().getCreatedAt();
-            // Si sale "Sin Fecha", el problema es el mapeo en el Service
-            return new SimpleStringProperty(dt != null ? dt.format(formatter) : "Sin Fecha");
-        });*/
-    private void loadSales() {
-        if (dpStart.getValue() == null || dpEnd.getValue() == null) {
-            showAlert("Error", "Debe seleccionar un rango de fechas.");
-            return;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    colDate.setCellValueFactory(cellData -> {
+        LocalDateTime fecha = cellData.getValue().getCreatedAt();
+        if (fecha != null) {
+            return new SimpleStringProperty(fecha.format(formatter));
+        } else {
+            return new SimpleStringProperty("Sin fecha");
         }
-        
+    });
+    
+    colProduct.setCellValueFactory(cellData -> {
+        Sale sale = cellData.getValue();
+        if (sale.getInventoryDTO() != null && 
+            sale.getInventoryDTO().getProduct() != null) {
+            Product p = sale.getInventoryDTO().getProduct();
+            return new SimpleStringProperty(p.getName() != null ? p.getName() : "Sin nombre");
+        }
+        return new SimpleStringProperty("N/A");
+    });
 
-        // Definir el rango del día (Inicio: 00:00:00, Fin: 23:59:59)
-        LocalDateTime startRange = dpStart.getValue().atStartOfDay();
-        LocalDateTime endRange = dpEnd.getValue().atTime(LocalTime.MAX);
+    colUser.setCellValueFactory(cellData -> {
+        if (cellData.getValue().getUserDTO() != null) {
+            User user = cellData.getValue().getUserDTO();
+            String nombre = user.getName() != null ? user.getName() : "";
+            String apellido = user.getLastName() != null ? user.getLastName() : "";
+            return new SimpleStringProperty(nombre + " " + apellido);
+        }
+        return new SimpleStringProperty("Admin");
+    });
 
-        // Obtener todas las ventas desde el servicio API
-        List<Sale> allSales = saleService.getAllSales();
-
-        if (SessionManager.getInstance().getCurrentBranch() == null) return;
-        Long currentBranchId = SessionManager.getInstance().getCurrentBranch().getId();
-
-        // Filtrado por Sucursal y por Rango de Fecha
-        List<Sale> filteredSales = allSales.stream()
-                .filter(s -> {
-                    // 1. Filtrar por ID de sucursal actual
-                    boolean sameBranch = s.getBranchDTO() != null &&
-                            s.getBranchDTO().getId().equals(currentBranchId);
-
-                    // 2. Filtrar si la fecha de creación está dentro del rango
-                    boolean inRange = true;
-                    if (s.getCreatedAt() != null) {
-                        inRange = !s.getCreatedAt().isBefore(startRange) &&
-                                !s.getCreatedAt().isAfter(endRange);
-                    }
-
-                    return sameBranch && inRange;
-                })
-                .toList();
-
-        // Actualizar la lista observable de la tabla
-        saleList.setAll(filteredSales);
-
-        // Calcular el total de la suma de las ventas filtradas
-        double total = filteredSales.stream()
-                .mapToDouble(s -> s.getSaleTotal() != null ? s.getSaleTotal() : 0.0)
-                .sum();
-
-        lblTotalPeriodo.setText(String.format("$%.2f", total));
-        saleList.forEach(s ->
-        System.out.println("Fecha cargada: " + s.getCreatedAt())
-        );
-
-        System.out.println("HHHHHHHHHHHHHHHHHHHHH" + tblSales.getItems().get(2).getCreatedAt()+ tblSales.getItems().get(2).getSaleTotal()+ tblSales.getItems().get(2).getId());
+    tblSales.setItems(saleList);
+}
+    private void loadSales() {
+    if (dpStart.getValue() == null || dpEnd.getValue() == null) {
+        showAlert("Error", "Debe seleccionar un rango de fechas.");
+        return;
     }
+
+    LocalDateTime startRange = dpStart.getValue().atStartOfDay();
+    LocalDateTime endRange = dpEnd.getValue().atTime(LocalTime.MAX);
+
+    List<Sale> allSales = saleService.getAllSales();
+
+    if (SessionManager.getInstance().getCurrentBranch() == null) return;
+    Long currentBranchId = SessionManager.getInstance().getCurrentBranch().getId();
+
+    List<Sale> filteredSales = allSales.stream()
+            .filter(s -> {
+                boolean sameBranch = s.getBranchDTO() != null &&
+                        s.getBranchDTO().getId().equals(currentBranchId);
+
+                boolean inRange = true;
+                if (s.getCreatedAt() != null) {
+                    inRange = !s.getCreatedAt().isBefore(startRange) &&
+                            !s.getCreatedAt().isAfter(endRange);
+                } else {
+                    inRange = false; 
+                }
+
+                return sameBranch && inRange;
+            })
+            .toList();
+
+    saleList.setAll(filteredSales);
+
+    double total = filteredSales.stream()
+            .mapToDouble(s -> s.getSaleTotal() != null ? s.getSaleTotal() : 0.0)
+            .sum();
+
+    lblTotalPeriodo.setText(String.format("$%.2f", total));
+}
 
     private void handleBack() {
         Stage stage = (Stage) btnBack.getScene().getWindow();
