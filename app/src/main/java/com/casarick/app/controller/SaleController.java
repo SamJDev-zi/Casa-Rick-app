@@ -1,6 +1,5 @@
 package com.casarick.app.controller;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +15,6 @@ import com.casarick.app.service.InventoryService;
 import com.casarick.app.service.SaleService;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
-import com.casarick.app.util.TicketPrinter;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -224,13 +222,12 @@ public class SaleController {
             if (success) {
                 item.setInventoryDTO(inv);
                 item.setCustomerDTO(selectedCustomer);
-                item.setCreatedAt(LocalDateTime.now());
                 confirmedSales.add(item);
             }
         }
 
         if (!confirmedSales.isEmpty()) {
-            TicketPrinter.printInvoice(confirmedSales);
+            //TicketPrinter.printInvoice(confirmedSales);
             showAlert("Éxito", "Venta realizada correctamente.");
             cartItems.clear();
             loadInitialData();

@@ -1,26 +1,42 @@
 package com.casarick.app.controller;
 
-import com.casarick.app.model.*;
-import com.casarick.app.service.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import com.casarick.app.model.Branch;
+import com.casarick.app.model.Category;
+import com.casarick.app.model.Color;
+import com.casarick.app.model.Industry;
+import com.casarick.app.model.Product;
+import com.casarick.app.model.Type;
+import com.casarick.app.service.CategoryService;
+import com.casarick.app.service.ColorService;
+import com.casarick.app.service.IndustryService;
+import com.casarick.app.service.InventoryService;
+import com.casarick.app.service.ProductService;
+import com.casarick.app.service.TypeService;
 import com.casarick.app.util.BarcodeGenerator;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
 import com.casarick.app.util.WebcamCaptureTask;
 import com.github.sarxos.webcam.Webcam;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-import javax.imageio.ImageIO;
 
 public class ProductController {
 
