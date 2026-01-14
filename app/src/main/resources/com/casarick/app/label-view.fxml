@@ -2,6 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -9,6 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1200.0" styleClass="banner-logo" stylesheets="@../../../css/stylecss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.casarick.app.controller.LabelController">
     
@@ -20,10 +25,46 @@
             </padding>
             
             <children>
-                <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnToday" mnemonicParsing="false" prefHeight="36.0" prefWidth="212.0" style="-fx-font-weight: bold;" styleClass="edit-button" text="Registrados hoy" />
-                <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#buttonBack" prefHeight="36.0" prefWidth="100.0" style="-fx-font-weight: bold;" styleClass="logout-button" text="Volver" />
+            <HBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="1176.0" spacing="12.0" styleClass="pane-con-fondo-transparente">
+               <children>
+                  <Label text="Desde:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpStart" prefWidth="140.0" />
+                  <Spinner fx:id="spStart" editable="true" prefHeight="24.0" prefWidth="100.0" />
+                  <Label text="Hasta:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpEnd" prefWidth="140.0" />
+                  <Spinner fx:id="spEnd" prefHeight="24.0" prefWidth="100.0" />
+                  <Button fx:id="btnSearch" style="-fx-background-color: #3498db; -fx-cursor: hand;" text="BUSCAR RANGO" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Pane HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="btnToday" layoutX="143.0" layoutY="8.0" style="-fx-background-color: #27ae60; -fx-cursor: hand;" text="VENTAS DE HOY" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children></Pane>
+                  <Button fx:id="buttonBack" onAction="#buttonBack" prefWidth="100.0" style="-fx-cursor: hand; -fx-font-weight: bold;" styleClass="logout-button" text="VOLVER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
             </children>
+         <effect>
+            <ColorAdjust brightness="-0.4" contrast="-0.43" />
+         </effect>
         </HBox>
 
         <VBox spacing="20.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="143.0">
