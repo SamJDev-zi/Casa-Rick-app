@@ -104,6 +104,9 @@
     -fx-padding: 5px;
     -fx-font-family: sans-serif;
 }
+.pane-con-fondo-transparente {
+    -fx-background-color: rgba(250, 250, 250, 0.5);
+}
 
 #createBranch {
     -fx-text-fill: white;
