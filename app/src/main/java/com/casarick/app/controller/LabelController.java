@@ -267,7 +267,7 @@ public class LabelController {
 
             JasperPrint print = JasperFillManager.fillReport(reportStream, null, dataSource);
 
-            JasperPrint print = JasperFillManager.fillReport(report, null, dataSource);
+            //JasperPrint print = JasperFillManager.fillReport(report, null, dataSource);
             
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmar Impresión");
