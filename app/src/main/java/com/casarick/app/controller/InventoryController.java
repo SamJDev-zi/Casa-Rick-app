@@ -1,5 +1,6 @@
 package com.casarick.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,8 @@ import com.casarick.app.service.CategoryService;
 import com.casarick.app.service.IndustryService;
 import com.casarick.app.service.InventoryService;
 import com.casarick.app.service.TypeService;
+import com.casarick.app.util.InventoryPrinter;
+import com.casarick.app.util.LabelPrinter;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
 
@@ -29,6 +32,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 
 public class InventoryController {
 
@@ -80,7 +87,12 @@ public class InventoryController {
     private Button btnClearFilters;
 
     @FXML
+    private Button printButton;
+
+    @FXML
     private Label resultsCountLabel;
+
+    private List<Inventory> printList = new ArrayList<>();
 
     // Servicios
     private final InventoryService inventoryService = new InventoryService();
@@ -92,7 +104,6 @@ public class InventoryController {
     private ObservableList<Inventory> originalInventoryList;
     private FilteredList<Inventory> filteredInventoryList;
 
-    // Método para actualizar el contador de resultados
     private void updateResultsCount(int count) {
         resultsCountLabel.setText("Mostrando " + count + " resultados");
     }
@@ -179,6 +190,7 @@ public class InventoryController {
         sortedList.comparatorProperty().bind(inventoryTable.comparatorProperty());
         inventoryTable.setItems(sortedList);
 
+        printList = sortedList;
         // 6. Actualizar contador
         updateResultsCount(filteredInventoryList.size());
     }
@@ -188,6 +200,7 @@ public class InventoryController {
         List<Inventory> inventoryList = inventoryService.getInventoriesByCreated(
                 SessionManager.getInstance().getCurrentBranch().getId());
 
+        printList = inventoryList;
         ObservableList<Inventory> observableList = FXCollections.observableArrayList(inventoryList);
         inventoryTable.setItems(observableList);
     }
@@ -285,6 +298,28 @@ public class InventoryController {
 
         filteredInventoryList.setPredicate(null);
         updateResultsCount(originalInventoryList.size());
+    }
+
+    @FXML
+    public void printButton() {
+        if (printList.isEmpty()) return;
+
+        try {
+            InventoryPrinter dataSource = new InventoryPrinter(printList);
+
+            java.io.InputStream reportStream = getClass().getResourceAsStream("/reports/inventario_casa_rick.jasper");
+
+            if (reportStream == null) {
+                System.out.println("Error: No se encuentra el archivo .jasper");
+                return;
+            }
+
+            JasperPrint print = JasperFillManager.fillReport(reportStream, null, dataSource);
+            JasperPrintManager.printReport(print, true);
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

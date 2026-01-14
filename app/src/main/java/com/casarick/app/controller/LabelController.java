@@ -238,11 +238,34 @@ public class LabelController {
         }
 
         try {
-            LabelPrinter dataSource = new LabelPrinter(displayList);
+            // Creamos una nueva lista temporal para "inflar" los datos
+            List<Inventory> listaParaImprimir = new ArrayList<>();
 
-            JasperReport report = (JasperReport) net.sf.jasperreports.engine.util.JRLoader.loadObject(
-                    getClass().getResourceAsStream("/reports/etiquetas_casa_rick.jasper")
-            );
+            // CÁLCULO DE ETIQUETAS:
+            // Una hoja Oficio es larga. Caben aprox 13 a 14 filas de 2cm.
+            // 6 columnas x 13 filas = 78 etiquetas.
+            // Vamos a poner 72 para dejar margen y asegurar que no se corte nada.
+            int copiasPorHoja = 72;
+
+            for (Inventory inv : displayList) {
+                // AQUÍ ESTÁ LA CLAVE:
+                // Repetimos el MISMO producto 72 veces en la lista
+                for (int i = 0; i < copiasPorHoja; i++) {
+                    listaParaImprimir.add(inv);
+                }
+            }
+
+            // Enviamos la lista "inflada" (con cientos de registros) al reporte
+            LabelPrinter dataSource = new LabelPrinter(listaParaImprimir);
+
+            java.io.InputStream reportStream = getClass().getResourceAsStream("/reports/etiquetas_casa_rick.jasper");
+
+            if (reportStream == null) {
+                System.out.println("Error: No se encuentra el archivo .jasper");
+                return;
+            }
+
+            JasperPrint print = JasperFillManager.fillReport(reportStream, null, dataSource);
 
             JasperPrint print = JasperFillManager.fillReport(report, null, dataSource);
             
