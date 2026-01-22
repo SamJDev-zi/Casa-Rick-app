@@ -172,7 +172,6 @@ public class InventoryController {
     private void loadInventoryData() {
         // 1. Obtener todos los inventarios con stock > 0 desde la API
         List<Inventory> allWithStock = inventoryService.getWithStock();
-
         // 2. Obtener ID de la sucursal actual del SessionManager
         Long currentBranchId = SessionManager.getInstance().getCurrentBranch().getId();
 
@@ -181,6 +180,7 @@ public class InventoryController {
                 .filter(inv -> inv.getBranch() != null && inv.getBranch().getId().equals(currentBranchId))
                 .collect(Collectors.toList());
 
+        printList = filteredList;
         // 4. Guardar la lista original y crear la lista filtrada
         originalInventoryList = FXCollections.observableArrayList(filteredList);
         filteredInventoryList = new FilteredList<>(originalInventoryList, p -> true);
@@ -307,7 +307,7 @@ public class InventoryController {
         try {
             InventoryPrinter dataSource = new InventoryPrinter(printList);
 
-            java.io.InputStream reportStream = getClass().getResourceAsStream("/reports/inventario_casa_rick.jasper");
+            java.io.InputStream reportStream = getClass().getResourceAsStream("/reports/invetario_casa_rick.jasper");
 
             if (reportStream == null) {
                 System.out.println("Error: No se encuentra el archivo .jasper");

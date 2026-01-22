@@ -24,13 +24,15 @@ public class InventoryPrinter implements JRDataSource {
     public Object getFieldValue(JRField jrField) throws JRException {
         Inventory currentInv = inventoryList.get(index);
         return switch (jrField.getName()) {
-            case "name_branch" -> SessionManager.getInstance().getCurrentBranch().getName();
-            case "inventory_id" -> currentInv.getId();
-            case "category"  -> currentInv.getProduct().getCategory().getId();
-            case "type"   -> currentInv.getProduct().getId();
-            case "industry"      -> currentInv.getProduct().getBarCodeNumber();
-            case "stock"-> currentInv.getProduct().getCategory().getName();
-            case "number"    ->  currentInv.getProduct().getCategory().getId() + " " + currentInv.getProduct().getId();
+            case "nameBranch" -> SessionManager.getInstance().getCurrentBranch().getName();
+            case "id" -> currentInv.getId();
+            case "category"  -> currentInv.getProduct().getCategory().getName();
+            case "type"   -> currentInv.getProduct().getType().getName();
+            case "industry"      -> currentInv.getProduct().getIndustry().getName();
+            case "stock"-> currentInv.getStock();
+            case "size" -> currentInv.getProduct().getSize();
+            case "barCode" -> currentInv.getProduct().getBarCodeNumber();
+            case "number"    ->  currentInv.getProduct().getCategory().getId() + "-" + currentInv.getProduct().getId();
             case "cost" -> currentInv.getCostPrice();
             case "sale" -> currentInv.getSalePrice();
             default -> null;
