@@ -16,6 +16,7 @@ import com.casarick.app.service.SaleService;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
 
+import com.casarick.app.util.TicketPrinter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -227,7 +228,7 @@ public class SaleController {
         }
 
         if (!confirmedSales.isEmpty()) {
-            //TicketPrinter.printInvoice(confirmedSales);
+            TicketPrinter.printInvoice(confirmedSales);
             showAlert("Éxito", "Venta realizada correctamente.");
             cartItems.clear();
             loadInitialData();

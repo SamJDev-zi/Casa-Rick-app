@@ -250,7 +250,7 @@ public class LabelController {
             for (Inventory inv : displayList) {
                 // AQUÍ ESTÁ LA CLAVE:
                 // Repetimos el MISMO producto 72 veces en la lista
-                for (int i = 0; i < copiasPorHoja; i++) {
+                for (int i = 0; i < inv.getStock(); i++) {
                     listaParaImprimir.add(inv);
                 }
             }
