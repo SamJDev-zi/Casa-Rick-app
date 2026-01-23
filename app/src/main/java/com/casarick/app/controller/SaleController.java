@@ -15,8 +15,8 @@ import com.casarick.app.service.InventoryService;
 import com.casarick.app.service.SaleService;
 import com.casarick.app.util.SceneSwitcher;
 import com.casarick.app.util.SessionManager;
-
 import com.casarick.app.util.TicketPrinter;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -153,7 +153,13 @@ public class SaleController {
                 showAlert("Error", "Cantidad no válida o insuficiente stock.");
                 return;
             }
-
+            inv.setStock(inv.getStock() - quantity);
+            tblInventory.refresh();
+            for (Inventory item : masterInventory) {
+                if (item.getId() == inv.getId() ){
+                    inv = item;
+                }
+            }
             addToCart(inv, totalDiscount, quantity);
 
         } catch (NumberFormatException e) {
@@ -206,6 +212,7 @@ public class SaleController {
         List<Sale> confirmedSales = new ArrayList<>();
 
         for (Sale item : cartItems) {
+
             Inventory inv = item.getInventoryDTO();
             // Asignamos la descripción global aquí
             item.setDescription(globalDesc);
@@ -239,11 +246,14 @@ public class SaleController {
     private void loadInitialData() {
         Branch currentBranch = SessionManager.getInstance().getCurrentBranch();
         
-
         masterInventory.setAll(inventoryService.getWithStock().stream()
                 .filter(i -> i.getBranch().getId().equals(currentBranch.getId()))
                 .toList());
-        filteredInventoryList = new FilteredList<>(masterInventory, p -> true);
+        ObservableList<Inventory> stockAux = FXCollections.observableArrayList();
+        for (Inventory p : masterInventory) {
+            stockAux.add(p.copy());
+        }
+        filteredInventoryList = new FilteredList<>(stockAux, p -> true);
 
         // 5. Configurar la tabla con la lista filtrada
         SortedList<Inventory> sortedList = new SortedList<>(filteredInventoryList);
