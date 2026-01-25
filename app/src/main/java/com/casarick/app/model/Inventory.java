@@ -12,6 +12,18 @@ public class Inventory {
     private LocalDateTime updated;
     private Branch branch;
 
+    public Inventory(Long id, Product product,Double costPrice,Double salePrice,int stock,LocalDateTime created,LocalDateTime updated,Branch branch){
+        this.id = id;
+        this.product = product;
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
+        this.stock = stock;
+        this.created = created;
+        this.updated = updated;
+        this.branch = branch;
+    }
+    public Inventory(){}
+
     public Long getId() {
         return id;
     }
@@ -74,5 +86,9 @@ public class Inventory {
 
     public void setBranch(Branch branch) {
         this.branch = branch;
+    }
+
+    public Inventory copy() {
+        return new Inventory(id, product, costPrice, salePrice, stock, created, updated, branch);
     }
 }
